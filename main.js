@@ -12,7 +12,7 @@ const makeRows = (rows,cols)=>{
 
         // add div tag grid-item based on grid set
         let cell = document.createElement("div")
-        // add classname grid-item based on grid set
+        // add classname grid-item to add border
 
         container.appendChild(cell).className="grid-item";
     }
@@ -26,4 +26,4 @@ const makeRows = (rows,cols)=>{
     container.addEventListener('mouseover', (event)=>{
         event.target.style.backgroundColor="#000000"
     })
-    makeRows(16,16)
+    makeRows(100,100)
