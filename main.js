@@ -1,11 +1,23 @@
 
 const container = document.getElementById("container")
 
+// set colorvalue to variable
+let colorPicked = document.getElementById("colorpicker").value
+
+//get the color selected in the color picker
+let userColor= document.getElementById("colorpicker");
+   
+    userColor.addEventListener("change",(e) => {
+        colorPicked = e.target.value
+    })
+
+
 const makeRows = (rows,cols)=>{
     // add class grid-row and grid-col to container div
 
     container.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
     container.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+
 
     // repeat adding the div with class grid item under container
     for (counter=0;counter < rows * cols;counter++ ){
@@ -19,11 +31,8 @@ const makeRows = (rows,cols)=>{
 
 }
 
-// document.getElementByClassName('container').on('mouseover', '.gridSquare', function(){
-// 		this.css('background-color', 'white');
-// 	});
-
+    // mouse over the canvas
     container.addEventListener('mouseover', (event)=>{
-        event.target.style.backgroundColor="#000000"
+        event.target.style.backgroundColor=colorPicked
     })
-    makeRows(100,100)
+    makeRows(64,64)
