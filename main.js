@@ -1,8 +1,22 @@
 
 const container = document.getElementById("container")
 
+const defaultGridValue = 16;
+let newGrid = defaultGridValue
+
+const newCanvas = ()=>{
+     newGrid = prompt("New Grid size:",`${defaultGridValue}`);
+     if (newGrid > 100){
+        alert("100 is the maximum pixels allowed.")
+        newGrid = defaultGridValue
+     }
+     makeRows(newGrid)
+
+}
+
 // set colorvalue to variable
 let colorPicked = document.getElementById("colorpicker").value
+
 
 //get the color selected in the color picker
 let userColor= document.getElementById("colorpicker");
@@ -11,16 +25,34 @@ let userColor= document.getElementById("colorpicker");
         colorPicked = e.target.value
     })
 
+const clearRows = () =>{
+    container.innerHTML = ''
 
-const makeRows = (rows,cols)=>{
+}
+
+const clearCanvas = ()=>{
+    let divs = document.getElementsByTagName("div");
+    for (var i = 0; i < divs.length; i++) {
+       if (divs[i].className === "grid-item"){
+             divs[i].style.backgroundColor = "transparent";
+       }
+    }
+}
+const eraserTool = ()=>{
+    colorPicked = "transparent"
+}
+
+
+
+const makeRows = (newGrid)=>{
     // add class grid-row and grid-col to container div
-
-    container.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
-    container.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    clearRows()
+    container.style.gridTemplateRows = `repeat(${newGrid}, 1fr)`;
+    container.style.gridTemplateColumns = `repeat(${newGrid}, 1fr)`;
 
 
     // repeat adding the div with class grid item under container
-    for (counter=0;counter < rows * cols;counter++ ){
+    for (counter=0;counter < newGrid * newGrid;counter++ ){
 
         // add div tag grid-item based on grid set
         let cell = document.createElement("div")
@@ -35,4 +67,6 @@ const makeRows = (rows,cols)=>{
     container.addEventListener('mouseover', (event)=>{
         event.target.style.backgroundColor=colorPicked
     })
-    makeRows(64,64)
+
+    makeRows(newGrid)
+    
